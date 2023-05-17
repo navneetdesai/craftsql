@@ -17,6 +17,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      color: black;
     }
     /* Adjust content positioning */
     .content {
@@ -25,7 +26,6 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      color: black;
     }
   </style>
 </head>
@@ -34,16 +34,30 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
     <a class="navbar-brand" href="#"><span class="h1">CraftSQL</span> </a>
   </nav>
-</header>
-
+  </header>
 
   <section class="content">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2 text-center">
-          <h1 class="display-4">Empower Your Database Operations</h1>
-          <p class="lead">Generate SQL queries effortlessly based on your requirements</p>
-          <a href="/querypage" class="btn btn-primary btn-lg">Get Started</a>
+          <h1 class="display-4">Generate SQL Queries</h1>
+          <p class="lead">Specify your query requirements</p>
+
+          <!-- Query Input Form -->
+          <form action="/generate" method="POST" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="query-input">Query Description</label>
+              <textarea class="form-control" id="query-input" name="query-input" rows="4" placeholder="Enter your query requirements"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Generate Query</button>
+          </form>
+
+          <!-- Query Results -->
+          <div class="mt-5">
+            <h2 class="mb-3">Generated SQL Query</h2>
+            <pre id="query-results" class="p-3 bg-light">No query generated yet</pre>
+          </div>
         </div>
       </div>
     </div>

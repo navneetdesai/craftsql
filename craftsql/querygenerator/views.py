@@ -3,8 +3,8 @@ from django.http import HttpResponse
 import cohere
 from . import auth
 
-
 co = cohere.Client(auth.COHERE_API)
+
 
 # Create your views here.
 def index(request):
@@ -14,9 +14,7 @@ def index(request):
 def querypage(request):
     return render(request, 'querypage.html')
 
-import cohere
 
-# print('Prediction: {}'.format(response.generations[0].text))
 def generate(request):
     if request.method == 'POST':
         query_input = request.POST.get('query-input')
@@ -31,5 +29,5 @@ def generate(request):
             k=0,
             stop_sequences=[],
             return_likelihoods='NONE')
-        return HttpResponse(response.generations[0].text)
-    return render(request, 'querypage.html')
+        return render(request, 'querypage.html', {'results': response.generations[0].text[3:-3]})
+    return render(request, 'querypage.html',  {'results': 'No query generated yet.'})

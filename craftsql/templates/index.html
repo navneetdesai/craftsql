@@ -1,23 +1,31 @@
 {% load static %}
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html>
 <head>
   <title>CraftSQL - Intelligent SQL Query Generation</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
   <header>
-    <h1>CraftSQL</h1>
-    <p>Intelligent SQL Query Generation</p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">CraftSQL</a>
+    </nav>
   </header>
 
   <section class="hero">
-    <div class="hero-content">
-      <h2>Empower Your Database Operations</h2>
-      <p>Generate SQL queries effortlessly based on your requirements</p>
-      <a href="/generate" class="btn btn-primary">Get Started</a>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <h1 class="display-4">Empower Your Database Operations</h1>
+          <p class="lead">Generate SQL queries effortlessly based on your requirements</p>
+          <a href="/generate" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+      </div>
     </div>
   </section>
 
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>

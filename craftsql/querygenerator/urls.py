@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('querypage', views.querypage, name='querypage')
+    path('querypage', views.querypage, name='querypage'),
+    path('generate', views.generate, name='generate')
 
 ]

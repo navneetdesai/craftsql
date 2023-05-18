@@ -16,3 +16,15 @@ def explain_query(query):
 def fix_query(query):
     query_input = f'Fix this query. Suggest results for Postgres, MySQL: {query}'
     return co.generate(model='command', prompt=f'{query_input}\n', max_tokens=2000, temperature=0, k=0, stop_sequences=[], return_likelihoods='NONE')
+
+def suggest_optimizations(query):
+    """
+    SELECT *
+FROM sales
+WHERE promo_id=12
+OR prod_id=125;
+    :param query:
+    :return:
+    """
+    query_input = f'Whichever database systems this query is compatible with, give me suggestions for optimizing this query: {query}. Write the updated query if it\'s different or any sql commands needed for optimization.'
+    return co.generate(model='command', prompt=f'{query_input}\n', max_tokens=2000, temperature=0, k=0, stop_sequences=[], return_likelihoods='NONE')

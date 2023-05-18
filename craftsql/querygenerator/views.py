@@ -56,24 +56,11 @@ def fix_query(request):
 
 
 def suggest_optimization(request):
-    if request.method == 'POST':
-        query = request.POST.get('query', '')
-
-        api_url = 'https://api.airops.ai/optimize-query'
-        headers = {
-            'Authorization': f'Bearer {AIROPS_API}',
-            'Content-Type': 'application/json'
-        }
-        data = {
-            'query': query
-        }
-        response = requests.post(api_url, headers=headers, json=data)
-
-        if response.status_code == 200:
-            fixed_query = response.json().get('optimization_suggestions', [])
-            return render(request, 'suggest.html', {'optimization_suggestions': fixed_query})
-        else:
-            error_message = 'Error occurred while optimizing the query.'
-            return render(request, 'suggest.html', {'error_message': error_message})
-
-    return render(request, 'suggest.html')
+    if request.method != 'POST':
+        return render(request, 'suggest.html')
+    query = request.POST.get('query-input', '')
+    if not query:
+        return render(request, 'suggest.html')
+    response = cohere_helper.suggest_optimizations(query)
+    print(response)
+    return render(request, 'suggest.html', {'results': response[0].text})

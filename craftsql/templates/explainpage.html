@@ -27,39 +27,38 @@
       flex-direction: column;
       color: black;
     }
-    /* Adjust section styling */
-    .section {
-      padding: 50px;
-      margin-bottom: 30px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* Result section */
+    .result {
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
   <header class="header d-flex justify-content-center">
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-      <a class="navbar-brand" href="#"><span class="h1">CraftSQL</span></a>
+      <a class="navbar-brand" href="#"><span class="h1">CraftSQL</span> </a>
     </nav>
   </header>
 
   <section class="content">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 text-center">
-          <div class="section">
-            <h2>Generate Query</h2>
-            <p>Effortlessly generate SQL queries based on your requirements.</p>
-            <a href="/generate" class="btn btn-primary btn-lg">Get Started</a>
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <h1 class="display-4">Explain SQL Query</h1>
+          <p class="lead">Enter an SQL query to explain its functionality</p>
+          <form method="POST" action="/explain">
+            {% csrf_token %}
+            <div class="form-group">
+              <textarea class="form-control" name="query" rows="5" placeholder="Enter SQL query" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Explain</button>
+          </form>
+          {% if explanation %}
+          <div class="result mt-5">
+            <h3>Explanation:</h3>
+            <pre>{{ explanation }}</pre>
           </div>
-        </div>
-        <div class="col-lg-6 text-center">
-          <div class="section">
-            <h2>Explain Query</h2>
-            <p>Get a detailed explanation of an existing SQL query.</p>
-            <a href="/explain" class="btn btn-primary btn-lg">Get Started</a>
-          </div>
+          {% endif %}
         </div>
       </div>
     </div>

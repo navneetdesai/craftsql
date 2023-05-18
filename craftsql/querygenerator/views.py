@@ -22,3 +22,7 @@ def generate(request):
         response = cohere_helper.generate_query(query_input)
         return render(request, 'querypage.html', {'results': response.generations[0].text})
     return render(request, 'querypage.html', {'results': 'No query generated yet.'})
+
+
+def explain_page(request):
+    return render(request, 'explainpage.html')

@@ -46,11 +46,13 @@ def explain_sql(request):
 
 
 def fix_query(request):
-    if request.method == 'POST':
-        if query := request.POST.get('query', ''):
-            response = cohere_helper.fix_query(query)
-            return render(request, 'fixpage.html', {'results': response[0].text[:]})
-    return render(request, 'fixpage.html')
+    if request.method != 'POST':
+        return render(request, 'fixpage.html')
+    query = request.POST.get('query', '')
+    if not query:
+        return render(request, 'fixpage.html')
+    response = cohere_helper.fix_query(query)
+    return render(request, 'fixpage.html', {'results': response[0].text})
 
 
 def suggest_optimization(request):

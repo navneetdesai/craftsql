@@ -63,6 +63,12 @@
               </div>
               <button type="submit" class="btn btn-primary btn-lg">Fix Query</button>
             </form>
+            {% if results %}
+          <div class="result mt-5">
+            <h3>Result:</h3>
+            <pre>{{ results }}</pre>
+          </div>
+          {% endif %}
           </div>
         </div>
       </div>

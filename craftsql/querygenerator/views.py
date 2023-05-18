@@ -37,7 +37,7 @@ def explain_sql(request):
 
     api_url = 'https://api.airops.com/explain-query'
     headers = {'Authorization': f'Bearer {AIROPS_API}'}
-    data = {'input': {'query': query} }
+    data = {'input': {'query': query}}
     print(headers)
     response = requests.post(api_url, headers=headers, json=data)
 
@@ -48,3 +48,31 @@ def explain_sql(request):
         explanation = 'Failed to get explanation. Please try again.'
 
     return render(request, 'explainpage.html', {'explanation': explanation})
+
+
+def fixpage(request):
+    return render(request, 'fixpage.html')
+
+
+def fix_query(request):
+    if request.method == 'POST':
+        query = request.POST.get('query', '')
+
+        api_url = 'https://api.airops.ai/fix-query'
+        headers = {
+            'Authorization': f'Bearer {AIROPS_API}',
+            'Content-Type': 'application/json'
+        }
+        data = {
+            'query': query
+        }
+        response = requests.post(api_url, headers=headers, json=data)
+
+        if response.status_code == 200:
+            fixed_query = response.json().get('fixed_query', '')
+            return render(request, 'fix_results.html', {'fixed_query': fixed_query})
+        else:
+            error_message = 'Error occurred while fixing the query.'
+            return render(request, 'fix_results.html', {'error_message': error_message})
+
+    return render(request, 'fix_query.html')

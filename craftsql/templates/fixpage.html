@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CraftSQL - Intelligent SQL Query Generation</title>
+  <title>CraftSQL - Intelligent SQL Query Fixing</title>
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <style>
@@ -35,6 +35,10 @@
       border-radius: 10px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
+    /* Adjust form styling */
+    .form-group {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
@@ -47,25 +51,18 @@
   <section class="content">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 text-center">
-          <div class="section">
-            <h2>Generate Query</h2>
-            <p>Effortlessly generate SQL queries based on your requirements.</p>
-            <a href="/generate" class="btn btn-primary btn-lg">Get Started</a>
-          </div>
-        </div>
-        <div class="col-lg-4 text-center">
-          <div class="section">
-            <h2>Explain Query</h2>
-            <p>Get a detailed explanation of an existing SQL query.</p>
-            <a href="/explain" class="btn btn-primary btn-lg">Get Started</a>
-          </div>
-        </div>
-        <div class="col-lg-4 text-center">
+        <div class="col-lg-8 offset-lg-2">
           <div class="section">
             <h2>Fix Query</h2>
-            <p>Fix and optimize your SQL queries for better performance.</p>
-            <a href="/fix" class="btn btn-primary btn-lg">Get Started</a>
+            <p>Fix SQL queries with the help of AI-powered suggestions.</p>
+            <form method="post" action="fixquery/">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="query">Enter Query:</label>
+                <textarea class="form-control" id="query" name="query" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg">Fix Query</button>
+            </form>
           </div>
         </div>
       </div>

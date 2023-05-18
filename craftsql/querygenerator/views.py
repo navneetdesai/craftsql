@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from . import cohere_helper
+from .auth import AIROPS_API
+import requests
 
 
 # Display last 50% records from Employee table
@@ -26,3 +28,23 @@ def generate(request):
 
 def explain_page(request):
     return render(request, 'explainpage.html')
+
+
+def explain_sql(request):
+    if request.method != 'POST':
+        return render(request, 'explain.html')
+    query = request.POST.get('query', '')
+
+    api_url = 'https://api.airops.com/explain-query'
+    headers = {'Authorization': f'Bearer {AIROPS_API}'}
+    data = {'input': {'query': query} }
+    print(headers)
+    response = requests.post(api_url, headers=headers, json=data)
+
+    print(response.text)
+    if response.status_code == 200:
+        explanation = response.json().get('explanation')
+    else:
+        explanation = 'Failed to get explanation. Please try again.'
+
+    return render(request, 'explainpage.html', {'explanation': explanation})

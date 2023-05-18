@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('querypage', views.querypage, name='querypage'),
     path('generate', views.generate, name='generate'),
-    path('explain', views.explain_page, name='explain')
+    path('explain', views.explain_page, name='explain'),
+    path('explainsql', views.explain_sql, name='explainsql'),
 
 ]

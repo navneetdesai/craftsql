@@ -46,7 +46,7 @@
         <div class="col-lg-8 offset-lg-2 text-center">
           <h1 class="display-4">Explain SQL Query</h1>
           <p class="lead">Enter an SQL query to explain its functionality</p>
-          <form method="POST" action="/explain">
+          <form method="POST" action="/explainsql">
             {% csrf_token %}
             <div class="form-group">
               <textarea class="form-control" name="query" rows="5" placeholder="Enter SQL query" required></textarea>

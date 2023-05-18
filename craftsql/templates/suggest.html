@@ -5,9 +5,8 @@
 <head>
   <title>CraftSQL - Intelligent SQL Query Generation</title>
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <style>
-
+    /* Center align the header */
     .header {
       text-align: center;
     }
@@ -19,6 +18,7 @@
       background-repeat: no-repeat;
       color: black;
     }
+
     /* Adjust content positioning */
     .content {
       height: 100vh;
@@ -27,21 +27,47 @@
       justify-content: center;
       flex-direction: column;
     }
+
+    /* Adjust form styles */
+    .form-group label {
+      color: #000000;
+      font-weight: bold;
+    }
+
+    .form-control {
+      color: #000000;
+      background-color: #ffffff;
+      border-color: #cccccc;
+    }
+
+    /* Adjust query results styles */
+    #query-results {
+      background-color: #f8f9fa;
+      color: #212529;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      padding: 10px;
+      overflow: auto;
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 300px;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
   <header class="header d-flex justify-content-center">
-  <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-    <a class="navbar-brand" href="#"><span class="h1">CraftSQL</span> </a>
-  </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+      <a class="navbar-brand" href="#"><span class="h1">CraftSQL</span></a>
+    </nav>
   </header>
 
   <section class="content">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2 text-center">
-          <h1 class="display-4">Optimize SQL Queries</h1>
-          <p class="lead">Specify your query, we will suggest the optimizations!</p>
+          <h1 class="display-4" style="color: #000000;">Optimize SQL Queries</h1>
+          <p class="lead" style="color: #000000;">Specify your query, we will suggest the optimizations!</p>
 
           <!-- Query Input Form -->
           <form action="/suggest_optimization" method="POST" class="mt-4">
@@ -53,10 +79,10 @@
             <button type="submit" class="btn btn-primary">Suggest optimizations</button>
           </form>
 
-
+          <!-- Suggestions -->
           <div class="mt-5">
-            <h2 class="mb-3">Suggestions</h2>
-            <pre id="query-results" class="p-3 bg-light">{{ results }}</pre>
+            <h2 class="mb-3" style="color: #000000;">Suggestions</h2>
+            <pre id="query-results">{{ results }}</pre>
           </div>
         </div>
       </div>

@@ -5,7 +5,6 @@
 <head>
   <title>CraftSQL - Intelligent SQL Query Generation</title>
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <style>
     /* Center align the header */
     .header {
@@ -31,6 +30,16 @@
     .result {
       margin-top: 2rem;
     }
+    /* Result pre tag styling */
+    .result pre {
+      background-color: #f8f9fa;
+      color: #212529;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      padding: 10px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
   </style>
 </head>
 <body>
@@ -44,8 +53,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2 text-center">
-          <h1 class="display-4">Explain SQL Query</h1>
-          <p class="lead">Enter an SQL query to explain its functionality</p>
+          <h1 class="display-4" style="color: #000000;">Explain SQL Query</h1>
+          <p class="lead" style="color: #000000;">Enter an SQL query to explain its functionality</p>
           <form method="POST" action="/explainsql">
             {% csrf_token %}
             <div class="form-group">
@@ -55,7 +64,7 @@
           </form>
           {% if explanation %}
           <div class="result mt-5">
-            <h3>Explanation:</h3>
+            <h3 style="color: #000000;">Explanation:</h3>
             <pre>{{ explanation }}</pre>
           </div>
           {% endif %}

@@ -5,7 +5,6 @@
 <head>
   <title>CraftSQL - Intelligent SQL Query Generation</title>
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <style>
     /* Center align the header */
     .header {
@@ -25,15 +24,52 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      color: black;
+      color: #ffffff;
     }
     /* Adjust section styling */
     .section {
-      padding: 50px;
+      padding: 30px;
       margin-bottom: 30px;
-      background-color: #ffffff;
       border-radius: 10px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      color: #ffffff;
+    }
+    .section:hover {
+      transform: scale(1.05);
+    }
+    .section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .section p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    .section a {
+      font-size: 18px;
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .section a:hover {
+      text-decoration: underline;
+    }
+
+    /* Custom section styles */
+    #generate-section {
+      background-color: rgba(0, 123, 255, 0.8);
+    }
+    #explain-section {
+      background-color: rgba(40, 167, 69, 0.8);
+    }
+    #fix-section {
+      background-color: rgba(255, 193, 7, 0.8);
+    }
+    #suggest-section {
+      background-color: rgba(220, 53, 69, 0.8);
     }
   </style>
 </head>
@@ -48,28 +84,30 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 text-center">
-          <div class="section">
+          <div class="section" id="generate-section" onclick="location.href='/generate'">
             <h2>Generate Query</h2>
             <p>Effortlessly generate SQL queries based on your requirements.</p>
             <a href="/generate" class="btn btn-primary btn-lg">Get Started</a>
           </div>
         </div>
         <div class="col-lg-6 text-center">
-          <div class="section">
+          <div class="section" id="explain-section" onclick="location.href='/explain'">
             <h2>Explain Query</h2>
             <p>Get a detailed explanation of an existing SQL query.</p>
             <a href="/explain" class="btn btn-primary btn-lg">Get Started</a>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-lg-6 text-center">
-          <div class="section">
+          <div class="section" id="fix-section" onclick="location.href='/fix'">
             <h2>Fix Query</h2>
             <p>Fix and optimize your SQL queries for better performance.</p>
             <a href="/fix" class="btn btn-primary btn-lg">Get Started</a>
           </div>
         </div>
         <div class="col-lg-6 text-center">
-          <div class="section">
+          <div class="section" id="suggest-section" onclick="location.href='/suggest'">
             <h2>Suggest Optimizations</h2>
             <p>Optimize your SQL queries for better performance.</p>
             <a href="/suggest" class="btn btn-primary btn-lg">Get Started</a>

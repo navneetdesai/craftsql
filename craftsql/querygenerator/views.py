@@ -62,4 +62,7 @@ def suggest_optimization(request):
     if not query:
         return render(request, 'suggest.html')
     response = cohere_helper.suggest_optimizations(query)
-    return render(request, 'suggest.html', {'results': response[0].text})
+    suggestions = response[0].text.split('\n')
+    suggestions = list(set(suggestions))
+
+    return render(request, 'suggest.html', {'results': '\n'.join(suggestions)})

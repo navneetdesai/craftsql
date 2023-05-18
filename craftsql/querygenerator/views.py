@@ -53,6 +53,9 @@ def explain_sql(request):
 def fixpage(request):
     return render(request, 'fixpage.html')
 
+def suggest(request):
+    return render(request, 'suggest.html')
+
 
 def fix_query(request):
     if request.method == 'POST':
@@ -76,3 +79,27 @@ def fix_query(request):
             return render(request, 'fix_results.html', {'error_message': error_message})
 
     return render(request, 'fix_query.html')
+
+
+def suggest_optimization(request):
+    if request.method == 'POST':
+        query = request.POST.get('query', '')
+
+        api_url = 'https://api.airops.ai/optimize-query'
+        headers = {
+            'Authorization': f'Bearer {AIROPS_API}',
+            'Content-Type': 'application/json'
+        }
+        data = {
+            'query': query
+        }
+        response = requests.post(api_url, headers=headers, json=data)
+
+        if response.status_code == 200:
+            fixed_query = response.json().get('optimization_suggestions', [])
+            return render(request, 'suggest.html', {'optimization_suggestions': fixed_query})
+        else:
+            error_message = 'Error occurred while optimizing the query.'
+            return render(request, 'suggest.html', {'error_message': error_message})
+
+    return render(request, 'suggest.html')

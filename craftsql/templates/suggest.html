@@ -1,0 +1,68 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CraftSQL - Intelligent SQL Query Generation</title>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <style>
+
+    .header {
+      text-align: center;
+    }
+
+    body {
+      background-image: url("{% static 'images/background.jpeg' %}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: black;
+    }
+    /* Adjust content positioning */
+    .content {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <header class="header d-flex justify-content-center">
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+    <a class="navbar-brand" href="#"><span class="h1">CraftSQL</span> </a>
+  </nav>
+  </header>
+
+  <section class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2 text-center">
+          <h1 class="display-4">Optimize SQL Queries</h1>
+          <p class="lead">Specify your query, we will suggest the optimizations!</p>
+
+          <!-- Query Input Form -->
+          <form action="/suggest_optimization" method="POST" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="query-input">Your query</label>
+              <textarea class="form-control" id="query-input" name="query-input" rows="4" placeholder="Enter your query."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Suggest optimizations</button>
+          </form>
+
+          <!-- Query Results -->
+          <div class="mt-5">
+            <h2 class="mb-3">Suggestions</h2>
+            <pre id="query-results" class="p-3 bg-light">{{ results }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

@@ -9,7 +9,7 @@ class Prompts:
     fix = 'Fix this query. Suggest results for Postgres, MySQL'
     suggest = 'Whichever database systems this query is compatible with, give me suggestions for optimizing this query'
 
-def generate(query_input)
+def generate(query_input):
     return co.generate(model='command', prompt=f'{query_input}\n', max_tokens=2000, temperature=0, k=0, stop_sequences=[], return_likelihoods='NONE')
 
 

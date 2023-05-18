@@ -1,12 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from . import cohere_helper
-from .auth import AIROPS_API
-import requests
 
 
 # Display last 50% records from Employee table
-
 
 def index(request):
     return render(request, 'index.html')
@@ -14,6 +11,18 @@ def index(request):
 
 def querypage(request):
     return render(request, 'querypage.html')
+
+
+def explain_page(request):
+    return render(request, 'explainpage.html')
+
+
+def fixpage(request):
+    return render(request, 'fixpage.html')
+
+
+def suggest(request):
+    return render(request, 'suggest.html')
 
 
 def generate(request):
@@ -25,15 +34,6 @@ def generate(request):
         return render(request, 'querypage.html', {'results': response.generations[0].text})
     return render(request, 'querypage.html', {'results': 'No query generated yet.'})
 
-
-def explain_page(request):
-    return render(request, 'explainpage.html')
-
-def fixpage(request):
-    return render(request, 'fixpage.html')
-
-def suggest(request):
-    return render(request, 'suggest.html')
 
 def explain_sql(request):
     if request.method != 'POST':
@@ -62,5 +62,4 @@ def suggest_optimization(request):
     if not query:
         return render(request, 'suggest.html')
     response = cohere_helper.suggest_optimizations(query)
-    print(response)
     return render(request, 'suggest.html', {'results': response[0].text})

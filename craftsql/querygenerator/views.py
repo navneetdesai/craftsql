@@ -6,6 +6,8 @@ from . import cohere_helper
 from .models import UserActivity, Functionality
 
 # Display last 50% records from Employee table
+from . import analysis
+
 
 
 
@@ -85,3 +87,4 @@ def suggest_optimization(request):
     suggestions = list(set(suggestions))
 
     return render(request, 'suggest.html', {'results': '\n'.join(suggestions)})
+

@@ -2,6 +2,8 @@ from datetime import datetime
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.views.decorators.cache import cache_page
+
 from . import cohere_helper
 from .models import UserActivity, Functionality
 
@@ -45,7 +47,7 @@ def suggest(request):
     update_user_activity(request, f)
     return render(request, 'suggest.html')
 
-
+@cache_page(60 * 15)
 def generate(request):
     if request.method == 'POST':
         query_input = request.POST.get('query-input')
@@ -55,7 +57,7 @@ def generate(request):
         return render(request, 'querypage.html', {'results': response.generations[0].text})
     return render(request, 'querypage.html', {'results': 'No query generated yet.'})
 
-
+@cache_page(60 * 15)
 def explain_sql(request):
     if request.method != 'POST':
         return render(request, 'explain.html')
@@ -65,7 +67,7 @@ def explain_sql(request):
     response = cohere_helper.explain_query(query)
     return render(request, 'explainpage.html', {'explanation': response[0].text})
 
-
+@cache_page(60 * 15)
 def fix_query(request):
     if request.method != 'POST':
         return render(request, 'fixpage.html')
@@ -75,7 +77,7 @@ def fix_query(request):
     response = cohere_helper.fix_query(query)
     return render(request, 'fixpage.html', {'results': response[0].text})
 
-
+@cache_page(60 * 15)
 def suggest_optimization(request):
     if request.method != 'POST':
         return render(request, 'suggest.html')

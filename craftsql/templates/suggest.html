@@ -58,10 +58,9 @@
 <body>
   <header class="header d-flex justify-content-center">
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-      <a class="navbar-brand" href="#"><span class="h1">CraftSQL</span></a>
+      <a class="navbar-brand" href="{% url 'index' %}"><span class="h1">CraftSQL</span></a>
     </nav>
   </header>
-
   <section class="content">
     <div class="container">
       <div class="row">
@@ -69,7 +68,6 @@
           <h1 class="display-4" style="color: #000000;">Optimize SQL Queries</h1>
           <p class="lead" style="color: #000000;">Specify your query, we will suggest the optimizations!</p>
 
-          <!-- Query Input Form -->
           <form action="/suggest_optimization" method="POST" class="mt-4">
             {% csrf_token %}
             <div class="form-group">
@@ -79,11 +77,12 @@
             <button type="submit" class="btn btn-primary">Suggest optimizations</button>
           </form>
 
-          <!-- Suggestions -->
+          {% if results %}
           <div class="mt-5">
             <h2 class="mb-3" style="color: #000000;">Suggestions</h2>
             <pre id="query-results">{{ results }}</pre>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>

@@ -40,12 +40,26 @@
       font-family: monospace;
       white-space: pre-wrap;
     }
+    /* Custom button style */
+    .custom-button {
+      padding: 10px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .custom-button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
   <header class="header d-flex justify-content-center">
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-      <a class="navbar-brand" href="#"><span class="h1">CraftSQL</span> </a>
+      <a class="navbar-brand" href="{% url 'index' %}"><span class="h1">CraftSQL</span></a>
     </nav>
   </header>
 
@@ -60,7 +74,7 @@
             <div class="form-group">
               <textarea class="form-control" name="query" rows="5" placeholder="Enter SQL query" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Explain</button>
+            <button type="submit" class="btn btn-primary custom-button">Explain</button>
           </form>
           {% if explanation %}
           <div class="result mt-5">

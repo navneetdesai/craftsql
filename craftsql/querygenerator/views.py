@@ -11,17 +11,12 @@ from .models import UserActivity, Functionality
 from . import analysis
 
 
-
-
 def index(request):
     return render(request, 'index.html')
 
 
 def querypage(request):
-    f = Functionality.objects.filter(name='generate')[0]
-    update_user_activity(request, f)
     return render(request, 'querypage.html')
-
 
 
 def update_user_activity(request, func):
@@ -31,24 +26,21 @@ def update_user_activity(request, func):
 
 
 def explain_page(request):
-    f = Functionality.objects.filter(name='explain_sql')[0]
-    update_user_activity(request, f)
     return render(request, 'explainpage.html')
 
 
 def fixpage(request):
-    f = Functionality.objects.filter(name='fix_query')[0]
-    update_user_activity(request, f)
     return render(request, 'fixpage.html')
 
 
 def suggest(request):
-    f = Functionality.objects.filter(name='suggest_optimization')[0]
-    update_user_activity(request, f)
     return render(request, 'suggest.html')
+
 
 @cache_page(60 * 15)
 def generate(request):
+    f = Functionality.objects.filter(name='generate')[0]
+    update_user_activity(request, f)
     if request.method == 'POST':
         query_input = request.POST.get('query-input')
         if not query_input:
@@ -57,8 +49,11 @@ def generate(request):
         return render(request, 'querypage.html', {'results': response.generations[0].text})
     return render(request, 'querypage.html', {'results': 'No query generated yet.'})
 
+
 @cache_page(60 * 15)
 def explain_sql(request):
+    f = Functionality.objects.filter(name='explain_sql')[0]
+    update_user_activity(request, f)
     if request.method != 'POST':
         return render(request, 'explain.html')
     query = request.POST.get('query', '')
@@ -67,8 +62,11 @@ def explain_sql(request):
     response = cohere_helper.explain_query(query)
     return render(request, 'explainpage.html', {'explanation': response[0].text})
 
+
 @cache_page(60 * 15)
 def fix_query(request):
+    f = Functionality.objects.filter(name='fix_query')[0]
+    update_user_activity(request, f)
     if request.method != 'POST':
         return render(request, 'fixpage.html')
     query = request.POST.get('query', '')
@@ -77,8 +75,11 @@ def fix_query(request):
     response = cohere_helper.fix_query(query)
     return render(request, 'fixpage.html', {'results': response[0].text})
 
+
 @cache_page(60 * 15)
 def suggest_optimization(request):
+    f = Functionality.objects.filter(name='suggest_optimization')[0]
+    update_user_activity(request, f)
     if request.method != 'POST':
         return render(request, 'suggest.html')
     query = request.POST.get('query-input', '')
@@ -89,4 +90,3 @@ def suggest_optimization(request):
     suggestions = list(set(suggestions))
 
     return render(request, 'suggest.html', {'results': '\n'.join(suggestions)})
-

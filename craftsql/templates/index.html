@@ -6,18 +6,15 @@
   <title>CraftSQL - Intelligent SQL Query Generation</title>
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <style>
-    /* Center align the header */
     .header {
       text-align: center;
     }
-    /* Add a cool background image */
     body {
       background-image: url("{% static 'images/background.jpeg' %}");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
     }
-    /* Adjust content positioning */
     .content {
       height: 100vh;
       display: flex;
@@ -26,7 +23,6 @@
       flex-direction: column;
       color: #ffffff;
     }
-    /* Adjust section styling */
     .section {
       padding: 30px;
       margin-bottom: 30px;
@@ -36,10 +32,10 @@
       cursor: pointer;
       background-size: cover;
       background-position: center;
-      color: #ffffff;
+      color: #000000;
     }
     .section:hover {
-      transform: scale(1.05);
+      transform: scale(1.15);
     }
     .section h2 {
       font-size: 28px;
@@ -58,7 +54,6 @@
       text-decoration: underline;
     }
 
-    /* Custom section styles */
     #generate-section {
       background-color: rgba(0, 123, 255, 0.8);
     }
@@ -102,7 +97,7 @@
         <div class="col-lg-6 text-center">
           <div class="section" id="fix-section" onclick="location.href='/fix'">
             <h2>Fix Query</h2>
-            <p>Fix and optimize your SQL queries for better performance.</p>
+            <p>Fix your SQL queries.</p>
             <a href="/fix" class="btn btn-primary btn-lg">Get Started</a>
           </div>
         </div>

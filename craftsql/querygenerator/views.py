@@ -5,6 +5,8 @@ from . import cohere_helper
 
 # Display last 50% records from Employee table
 
+
+
 def index(request):
     return render(request, 'index.html')
 

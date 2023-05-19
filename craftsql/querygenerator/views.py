@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from datetime import datetime
+
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from . import cohere_helper
-
+from .models import UserActivity, Functionality
 
 # Display last 50% records from Employee table
 
@@ -12,18 +14,33 @@ def index(request):
 
 
 def querypage(request):
+    f = Functionality.objects.filter(name='generate')[0]
+    update_user_activity(request, f)
     return render(request, 'querypage.html')
 
 
+
+def update_user_activity(request, func):
+    # print(f'\n{func}\n')
+    user_activity = UserActivity(functionality=func, timestamp=datetime.now())
+    user_activity.save()
+
+
 def explain_page(request):
+    f = Functionality.objects.filter(name='explain_sql')[0]
+    update_user_activity(request, f)
     return render(request, 'explainpage.html')
 
 
 def fixpage(request):
+    f = Functionality.objects.filter(name='fix_query')[0]
+    update_user_activity(request, f)
     return render(request, 'fixpage.html')
 
 
 def suggest(request):
+    f = Functionality.objects.filter(name='suggest_optimization')[0]
+    update_user_activity(request, f)
     return render(request, 'suggest.html')
 
 
